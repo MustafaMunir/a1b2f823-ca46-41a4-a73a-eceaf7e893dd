@@ -10,6 +10,9 @@ namespace IntSequenceString
             int candidateSeqStartIndex = 0, scanningSeqStartIndex = 0;
             int candidateSeqFinshIndex = 0, scanningSeqFinishIndex = 0;
 
+            if (String.IsNullOrEmpty(intSequenceString))
+                return "";
+            
             int[] intSequenceArr = intSequenceString.Split(null).Select(x => int.Parse(x)).ToArray();
 
             for (int i = 0; i < intSequenceArr.Length; ++i){

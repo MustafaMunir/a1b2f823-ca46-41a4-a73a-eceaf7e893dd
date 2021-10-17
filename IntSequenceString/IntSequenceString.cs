@@ -7,31 +7,31 @@ namespace IntSequenceString
     {
         public string LongestIncreasingSubsequence(string intSequenceString)
         {
-            int lisStartIndex = 0, currentLisStartIndex = 0;
-            int lisFinshIndex = 0, currentLisFinishIndex = 0;
+            int candidateSeqStartIndex = 0, scanningSeqStartIndex = 0;
+            int candidateSeqFinshIndex = 0, scanningSeqFinishIndex = 0;
 
             int[] intSequenceArr = intSequenceString.Split(null).Select(x => int.Parse(x)).ToArray();
 
-            for (int i = 0; i < intSequenceArr.Length - 1; ++i){
-                if (intSequenceArr[i] < intSequenceArr[i + 1] ) {
-                    currentLisFinishIndex = i + 1;
+            for (int i = 0; i < intSequenceArr.Length; ++i){
+                if ((i < intSequenceArr.Length - 1) && (intSequenceArr[i] < intSequenceArr[i + 1])) {
+                    scanningSeqFinishIndex = i + 1;
                     continue;
                 }
                 else {
-                    currentLisFinishIndex = i;
+                    scanningSeqFinishIndex = i;
                 }
 
-                if ((lisFinshIndex - lisStartIndex) < (currentLisFinishIndex - currentLisStartIndex))
+                if ((candidateSeqFinshIndex - candidateSeqStartIndex) < (scanningSeqFinishIndex - scanningSeqStartIndex))
                 {
-                    lisFinshIndex = currentLisFinishIndex;
-                    lisStartIndex = currentLisStartIndex;
+                    candidateSeqFinshIndex = scanningSeqFinishIndex;
+                    candidateSeqStartIndex = scanningSeqStartIndex;
                 }
 
-                currentLisStartIndex = currentLisFinishIndex = i + 1;
+                scanningSeqStartIndex = scanningSeqFinishIndex = i + 1;
             }
 
-            ArraySegment<int> segment = new ArraySegment<int>(intSequenceArr, lisStartIndex, (lisFinshIndex - lisStartIndex + 1));
-
+            /* Extract the longest increasing sequence. */
+            ArraySegment<int> segment = new ArraySegment<int>(intSequenceArr, candidateSeqStartIndex, (candidateSeqFinshIndex - candidateSeqStartIndex + 1));
             string result = String.Join(" ", segment.Select(p=>p.ToString()).ToArray());
 
             return result;

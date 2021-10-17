@@ -1,10 +1,10 @@
 https://github.com/dotnet/dotnet-docker/tree/main/samples/complexapp
+https://docs.microsoft.com/en-us/dotnet/devops/dotnet-test-github-action
 
 
-docker build -t ascending-seq-image -f Dockerfile .
-docker run -it --rm ascending-seq-image
-
-
- docker ps -a
- docker images
- docker rmi 
+List running containers: docker ps -a
+List Images: docker images
+Remove image: docker rmi <image id> 
+Cleanup resources: docker system prune -a
+Rebuild: docker-compose build
+Run the tests:  docker-compose run test
